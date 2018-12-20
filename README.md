@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/deviavir/vue-bar/master/media/logo.png" width="500" alt="Vue Bars">
+  <img src="https://raw.githubusercontent.com/mhyrr/vue-vert-bar/master/media/logo.png" width="500" alt="Vue Bars">
   <br>
-  <h1>Vue Bars</h1>
+  <h1>Vue Vertical Bars</h1>
   <p>🌈 Simple, elegant spark bars for Vue.js</p>
   <br>
   <a href="https://www.npmjs.org/package/vuebars"><img src="https://img.shields.io/npm/v/vuebars.svg?style=flat-square" alt="npm"></a>
