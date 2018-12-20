@@ -9,7 +9,7 @@ export default {
       required: true
     },
     autoDraw: Boolean,
-    barWidth: {
+    barHeight: {
       type: Number,
       default: 8
     },
@@ -41,7 +41,8 @@ export default {
     if (!this.data || this.data.length < 2) return
     const { width, height, padding } = this
     const viewWidth = width || 300
-    const viewHeight = height || 75
+    const viewHeight = width || 300
+    
     const boundary = {
       minX: padding,
       minY: padding,
@@ -56,8 +57,8 @@ export default {
     return h('svg', {
       attrs: {
         width: width || '100%',
-        height: height || '25%',
-        viewBox: `0 0 ${viewWidth} ${viewHeight}`
+        height: width || '25%',
+        viewBox: `0 0 ${viewWidth} ${viewWidth}`
       }
     }, [
       h(Path, {
