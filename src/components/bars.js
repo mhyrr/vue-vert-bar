@@ -41,8 +41,8 @@ export default {
     if (!this.data || this.data.length < 2) return
     const { width, height, padding } = this
     const viewWidth = width || 300
-    const viewHeight = width || 300
-    
+    const viewHeight = width || 600
+
     const boundary = {
       minX: padding,
       minY: padding,
@@ -56,9 +56,10 @@ export default {
 
     return h('svg', {
       attrs: {
-        width: width || '100%',
-        height: width || '25%',
-        viewBox: `0 0 ${viewWidth} ${viewWidth}`
+        width: width || '50%',
+        height: height || '50%',
+        viewBox: `0 0 ${viewWidth} ${viewHeight}`,
+        overflow: 'scroll'
       }
     }, [
       h(Path, {

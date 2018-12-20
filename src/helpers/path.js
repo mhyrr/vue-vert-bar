@@ -51,7 +51,7 @@ export function genBars (_this, arr, h) {
     _this.barHeight = totalHeight - (_this.padding || 5)
   }
   if (!_this.rounding) {
-    _this.rounding = 2
+    _this.rounding = 1
   }
   // console.log(_this.barHeight)
 

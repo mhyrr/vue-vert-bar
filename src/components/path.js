@@ -7,7 +7,7 @@ export default {
     const { data, boundary, max, min } = this
     const points = genPoints(data, boundary, { max, min } )
 
-    // console.log (points)
+    console.log (points)
     const bars = genBars(this, points, h)
 
     return h('g', {
