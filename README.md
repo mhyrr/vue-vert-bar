@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mhyrr/vue-vert-bar/master/media/logo.png" width="500" alt="Vue Bars">
+  <img src="https://raw.githubusercontent.com/mhyrr/vue-vert-bar/master/img/logo.png" width="500" alt="Vue Bars">
   <br>
   <h1>Vue Vertical Bars</h1>
   <p>🌈 Simple, elegant spark bars for Vue.js</p>
