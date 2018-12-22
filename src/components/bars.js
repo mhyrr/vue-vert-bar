@@ -31,9 +31,13 @@ export default {
     },
     height: Number,
     width: Number,
+    flip: {
+      type: Boolean,
+      default: false
+    },
     padding: {
       type: Number,
-      default: 8
+      default: 4
     }
   },
 
@@ -41,7 +45,7 @@ export default {
     if (!this.data || this.data.length < 2) return
     const { width, height, padding } = this
     const viewWidth = width || 300
-    const viewHeight = width || 600
+    const viewHeight = height || 600
 
     const boundary = {
       minX: padding,
@@ -56,8 +60,8 @@ export default {
 
     return h('svg', {
       attrs: {
-        width: width || '50%',
-        height: height || '50%',
+        width: width || '100%',
+        height: height || '100%',
         viewBox: `0 0 ${viewWidth} ${viewHeight}`,
         overflow: 'scroll'
       }

@@ -1,11 +1,11 @@
 {
-  "name": "vuebars",
-  "productionName": "Vue Bars",
-  "version": "0.1.3",
-  "description": "Simple, elegant spark bars for Vue.js",
-  "main": "dist/vue-bars.common.js",
-  "module": "dist/vue-bars.esm.js",
-  "unpkg": "dist/vue-bars.js",
+  "name": "vuevertbars",
+  "productionName": "Vue Vert Bars",
+  "version": "0.1.0",
+  "description": "Simple, vertical spark bars for Vue.js",
+  "main": "dist/vue-vert-bars.common.js",
+  "module": "dist/vue-vert-bars.esm.js",
+  "unpkg": "dist/vue-vert-bars.js",
   "files": [
     "dist"
   ],
@@ -19,6 +19,8 @@
   "keywords": [
     "vue",
     "bars",
+    "vertical",
+    "verticalbars",
     "svg",
     "graph",
     "data-visualization",
@@ -26,9 +28,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/DeviaVir/vue-bar.git"
+    "url": "https://github.com/mhyrr/vue-vert-bar.git"
   },
-  "author": "DeviaVir <chase@sillevis.net> (https://github.com/DeviaVir)",
+  "author": "Greg Olsen <grolsen@gmail.com> (https://github.com/mhyrr)",
   "license": "MIT",
   "peerDependencies": {
     "vue": "^2.2.4"

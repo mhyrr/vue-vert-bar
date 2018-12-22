@@ -2,14 +2,27 @@
   <main class="main">
     <github-badge slug="deviavir/vue-bars" />
 
-    <h1>Vue Bars</h1>
-    <p> Simple, elegant spark bars for Vue.js</p>
+    <h1>Vue Vert Bars</h1>
+    <p> Simple, vertical spark bars for Vue.js</p>
+    <p> Flip it, or reverse it</p>
+    <p> (1 or 2) </p>
     <bars
-      :key="data"
       :data="data"
+      :height="300"
+      :width="100"
       :gradient="gradient"
-      :barHeight="5"
-      :growDuration="1">
+      :barHeight="2.5"
+      :growDuration="2"
+      :flip="true">
+    </bars>
+    <bars
+      :data="data"
+      :height="300"
+      :width="100"
+      :gradient="gradient"
+      :barHeight="2.5"
+      :growDuration="2"
+      :flip="false">
     </bars>
 
     <pre class="code-wrap"><code class="code" v-html="code"></code></pre>
@@ -33,8 +46,16 @@
   :key="reference-to-your-var"
   :data="[8, 12, 2, 8, 5, 10, 3, 5, 8, 12, 2, 8, 2, 9, 10, 2, 9, 4, 5, 6, 7, 3, 2, 3, 5, 2, 9, 10, 2, 9, 4]"
   :gradient="['#ffbe88', '#ff93df']"
-  :barWidth="8"
-  :growDuration="1">
+  :barWidth="2.5"
+  :growDuration="2"
+  :flip="true">
+</bars>
+<bars
+  :key="reference-to-your-var"
+  :data="[8, 12, 2, 8, 5, 10, 3, 5, 8, 12, 2, 8, 2, 9, 10, 2, 9, 4, 5, 6, 7, 3, 2, 3, 5, 2, 9, 10, 2, 9, 4]"
+  :gradient="['#ffbe88', '#ff93df']"
+  :barWidth="2.5"
+  :growDuration="2">
 </bars>`)
     },
   }
@@ -49,7 +70,7 @@
 
   .main {
     max-width: 650px;
-    margin: 15vh auto 20px;
+    margin: 8vh auto 20px;
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

@@ -6,7 +6,7 @@ import { generateGradientStepsCss } from './gradient'
  * @param  {object}             boundary
  * @return {object[]}
  */
-export function genPoints (inArr, { minX, minY, maxX, maxY }, { max, min }) {
+export function genPoints (inArr, { minX, minY, maxX, maxY }, { max, min }, flip) {
   let arr = inArr.map(item => (typeof item === 'number' ? item : item.value))
 
   //WTF
@@ -24,10 +24,14 @@ export function genPoints (inArr, { minX, minY, maxX, maxY }, { max, min }) {
     return {
       y: index * gridY + minY,
       x:
-        maxX -
-        (value - minValue) * gridX +
-        +(index === arr.length - 1) * 0.00001 -
-        +(index === 0) * 0.00001,
+        flip ?
+          maxX - (value - minValue) * gridX +
+          +(index === arr.length - 1) * 0.00001 -
+          +(index === 0) * 0.00001
+          : maxX -
+          (value - minValue) * gridX +
+          +(index === arr.length - 1) * 0.00001 -
+          +(index === 0) * 0.00001,
 
       // x: index * gridX + minX,
       // y:
@@ -40,7 +44,7 @@ export function genPoints (inArr, { minX, minY, maxX, maxY }, { max, min }) {
   })
 }
 
-export function genBars (_this, arr, h) {
+export function genBars (_this, arr, h, flip) {
   let { minX, minY, maxX, maxY } = _this.boundary
   const totalHeight = (maxY) / (arr.length-1)
 
@@ -70,7 +74,9 @@ export function genBars (_this, arr, h) {
   const offsetY = (totalHeight - _this.barHeight) / 2
   // const offsetX = (totalHeight - _this.barHeight) / 2
 
+
   return arr.map((item, index) => {
+    console.log(maxX, item.x)
     return h('rect', {
       attrs: {
         id: `bar-id-${index}`,
@@ -78,13 +84,13 @@ export function genBars (_this, arr, h) {
         // x: item.x - offsetX,
         // y: 0,
         y: item.y - offsetY,
-        x: 0,
+        x: flip ? item.x : 0,
 
         // width: _this.barWidth,
         // height: (maxY - item.y),
 
         height: _this.barHeight,
-        width: (maxX - item.x),
+        width: maxX - item.x,
 
         rx: _this.rounding,
         ry: _this.rounding
@@ -93,8 +99,8 @@ export function genBars (_this, arr, h) {
       h('animate', {
         attrs: {
           attributeName: 'width',
-          from: 0,
-          to: (maxX - item.x),
+          from: flip ? item.x : 0,
+          to: maxX - item.x,
           dur: `${_this.growDuration}s`,
           fill: 'freeze'
         }
