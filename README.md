@@ -5,7 +5,7 @@
   <p>🌈 Simple, vertical spark bars for Vue.js</p>
   <p><a href="https://github.com/DeviaVir/vue-bar">Modified from the original vue bars by DeviaVir</a></p>
   <br>
-  <a href="https://www.npmjs.org/package/vuebars"><img src="https://img.shields.io/npm/v/vuebars.svg?style=flat-square" alt="npm"></a>
+  <a href="https://www.npmjs.org/package/vuevertbars"><img src="https://img.shields.io/npm/v/vuebars.svg?style=flat-square" alt="npm"></a>
   <img src="https://img.shields.io/badge/vue-^2.2-4fc08d.svg?colorA=2c3e50&style=flat-square" alt="vue">
 </div>
 
@@ -26,7 +26,7 @@ import Bars from 'vuevertbars'
 Vue.use(Bars)
 ```
 
-[Live Demo](https://jsfiddle.net/nyh18bLq/91/)
+[Live Demo](https://mhyrr.github.io/vue-vert-bar/index.html)
 
 *vue template*
 
@@ -39,8 +39,8 @@ Vue.use(Bars)
 
 ## Inspired by
 
-[vuebars](https://github.com/DeviaVir/vue-bar) - 🌈 Simple, elegant spark bars for Vue.js
-[vuetrend](https://www.npmjs.org/package/vuetrend) - 📈 Simple, elegant spark lines
+- [vuebars](https://github.com/DeviaVir/vue-bar) - 🌈 Simple, elegant spark bars for Vue.js
+- [vuetrend](https://www.npmjs.org/package/vuetrend) - 📈 Simple, elegant spark lines
 
 ## API
 

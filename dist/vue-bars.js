@@ -57,7 +57,7 @@ function generateGradientStepsCss(from, to, count) {
  * @param  {object}             boundary
  * @return {object[]}
  */
-function genPoints (inArr, ref, ref$1) {
+function genPoints (inArr, ref, ref$1, flip) {
   var minX = ref.minX;
   var minY = ref.minY;
   var maxX = ref.maxX;
@@ -66,62 +66,103 @@ function genPoints (inArr, ref, ref$1) {
   var min = ref$1.min;
 
   var arr = inArr.map(function (item) { return (typeof item === 'number' ? item : item.value); });
-  var minValue = Math.min.apply(Math, arr.concat( [min] )) - 0.001;
-  var gridX = (maxX - minX) / (arr.length - 1);
-  var gridY = (maxY - minY) / (Math.max.apply(Math, arr.concat( [max] )) + 0.001 - minValue);
+
+  //WTF
+  var minValue = 0;//Math.min(...arr, min) - 0.001
+  var gridY = (maxY - minY) / (arr.length - 1);
+  var gridX = (maxX - minX) / (Math.max.apply(Math, arr.concat( [max] )) + 0.001 - minValue);
+
+
+  // const gridX = (maxX - minX) / (arr.length - 1)
+  // const gridY = (maxY - minY) / (Math.max(...arr, max) + 0.001 - minValue)
 
   return arr.map(function (value, index) {
+    // console.log(value, gridX, maxX, minValue)
     var title = typeof inArr[index] === 'number' ? inArr[index] : inArr[index].title;
     return {
-      x: index * gridX + minX,
-      y:
-        maxY -
-        (value - minValue) * gridY +
-        +(index === arr.length - 1) * 0.00001 -
-        +(index === 0) * 0.00001,
+      y: index * gridY + minY,
+      x:
+        flip ?
+          maxX - (value - minValue) * gridX +
+          +(index === arr.length - 1) * 0.00001 -
+          +(index === 0) * 0.00001
+          : maxX -
+          (value - minValue) * gridX +
+          +(index === arr.length - 1) * 0.00001 -
+          +(index === 0) * 0.00001,
+
+      // x: index * gridX + minX,
+      // y:
+      //   maxY -
+      //   (value - minValue) * gridY +
+      //   +(index === arr.length - 1) * 0.00001 -
+      //   +(index === 0) * 0.00001,
       v: title
     }
   })
 }
 
-function genBars (_this, arr, h) {
+function genBars (_this, arr, h, flip) {
   var ref = _this.boundary;
   var minX = ref.minX;
   var minY = ref.minY;
   var maxX = ref.maxX;
   var maxY = ref.maxY;
-  var totalWidth = (maxX) / (arr.length-1);
-  if (!_this.barWidth) {
-    _this.barWidth = totalWidth - (_this.padding || 5);
+  var totalHeight = (maxY) / (arr.length-1);
+
+  // console.log(maxY, minY, maxX, minX, totalHeight)
+
+  // console.log(_this.barHeight)
+  if (!_this.barHeight) {
+    _this.barHeight = totalHeight - (_this.padding || 5);
   }
   if (!_this.rounding) {
-    _this.rounding = 2;
+    _this.rounding = 1;
   }
+  // console.log(_this.barHeight)
+
+  // const totalWidth = (maxX) / (arr.length-1)
+  // if (!_this.barWidth) {
+  //   _this.barWidth = totalWidth - (_this.padding || 5)
+  // }
+  // if (!_this.rounding) {
+  //   _this.rounding = 2
+  // }
 
   var gradients = 0;
   if (_this.gradient && _this.gradient.length > 1) {
     gradients = generateGradientStepsCss(_this.gradient[0], _this.gradient[1], (arr.length-1));
   }
-  var offsetX = (totalWidth - _this.barWidth) / 2;
+  var offsetY = (totalHeight - _this.barHeight) / 2;
+  // const offsetX = (totalHeight - _this.barHeight) / 2
+
 
   return arr.map(function (item, index) {
+    console.log(maxX, item.x);
     return h('rect', {
       attrs: {
         id: ("bar-id-" + index),
         fill: (gradients ? gradients[index] : (_this.gradient[0] ? _this.gradient[0] : '#000')),
-        x: item.x - offsetX,
-        y: 0,
-        width: _this.barWidth,
-        height: (maxY - item.y),
+        // x: item.x - offsetX,
+        // y: 0,
+        y: item.y - offsetY,
+        x: flip ? item.x : 0,
+
+        // width: _this.barWidth,
+        // height: (maxY - item.y),
+
+        height: _this.barHeight,
+        width: maxX - item.x,
+
         rx: _this.rounding,
         ry: _this.rounding
       }
     }, [
       h('animate', {
         attrs: {
-          attributeName: 'height',
-          from: 0,
-          to: (maxY - item.y),
+          attributeName: 'width',
+          from: flip ? item.x : 0,
+          to: maxX - item.x,
           dur: ((_this.growDuration) + "s"),
           fill: 'freeze'
         }
@@ -132,7 +173,7 @@ function genBars (_this, arr, h) {
 }
 
 var Path = {
-  props: ['data', 'boundary', 'barWidth', 'id', 'gradient', 'growDuration', 'max', 'min'],
+  props: ['data', 'boundary', 'barHeight', 'id', 'gradient', 'growDuration', 'max', 'min', 'flip'],
 
   render: function render (h) {
     var ref = this;
@@ -140,8 +181,11 @@ var Path = {
     var boundary = ref.boundary;
     var max = ref.max;
     var min = ref.min;
-    var points = genPoints(data, boundary, { max: max, min: min } );
-    var bars = genBars(this, points, h);
+    var flip = ref.flip;
+    var points = genPoints(data, boundary, { max: max, min: min }, flip );
+
+    console.log (points);
+    var bars = genBars(this, points, h, flip);
 
     return h('g', {
       attrs: {
@@ -160,7 +204,7 @@ var Bars$1 = {
       required: true
     },
     autoDraw: Boolean,
-    barWidth: {
+    barHeight: {
       type: Number,
       default: 8
     },
@@ -182,9 +226,13 @@ var Bars$1 = {
     },
     height: Number,
     width: Number,
+    flip: {
+      type: Boolean,
+      default: false
+    },
     padding: {
       type: Number,
-      default: 8
+      default: 4
     }
   },
 
@@ -195,7 +243,8 @@ var Bars$1 = {
     var height = ref.height;
     var padding = ref.padding;
     var viewWidth = width || 300;
-    var viewHeight = height || 75;
+    var viewHeight = height || 600;
+
     var boundary = {
       minX: padding,
       minY: padding,
@@ -210,8 +259,9 @@ var Bars$1 = {
     return h('svg', {
       attrs: {
         width: width || '100%',
-        height: height || '25%',
-        viewBox: ("0 0 " + viewWidth + " " + viewHeight)
+        height: height || '100%',
+        viewBox: ("0 0 " + viewWidth + " " + viewHeight),
+        overflow: 'scroll'
       }
     }, [
       h(Path, {
