@@ -1,11 +1,11 @@
 {
   "name": "vuevertbars",
   "productionName": "Vue Vert Bars",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Simple, vertical spark bars for Vue.js",
-  "main": "dist/vue-vert-bars.common.js",
-  "module": "dist/vue-vert-bars.esm.js",
-  "unpkg": "dist/vue-vert-bars.js",
+  "main": "dist/vuevertbars.common.js",
+  "module": "dist/vuevertbars.esm.js",
+  "unpkg": "dist/vuevertbars.js",
   "files": [
     "dist"
   ],
@@ -14,7 +14,7 @@
     "dev": "vbuild docs/app.js --dev",
     "docs:build": "vbuild docs/app.js --dist docs/dist",
     "deploy": "npm run docs:build && gh-pages -d docs/dist",
-    "build": "rollup -c --environment BUILD && uglifyjs dist/vue-bars.js > dist/vue-bars.min.js"
+    "build": "rollup -c --environment BUILD && uglifyjs dist/vue-bars.js > dist/vuevertbars.min.js"
   },
   "keywords": [
     "vue",
@@ -46,6 +46,7 @@
     "rollup-plugin-buble": "^0.15.0",
     "uglify-js": "^2.8.10",
     "vbuild": "^6.24.2",
-    "vue-github-badge": "^1.0.0"
+    "vue-github-badge": "^1.0.0",
+    "vuevertbars": "0.3.0"
   }
 }

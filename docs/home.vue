@@ -32,9 +32,12 @@
 </template>
 
 <script>
-  import Bars from '../src/index.js'
+  // import Bars from '../src/index.js'
+  import Bars from 'vuevertbars'
   import hanabi from 'hanabi'
   import GithubBadge from 'vue-github-badge'
+
+
 
   export default {
     components: { Bars, GithubBadge },

@@ -3,10 +3,10 @@ import buble from 'rollup-plugin-buble'
 export default {
   entry: 'src/index.js',
   plugins: [buble()],
-  moduleName: 'vue-bars',
+  moduleName: 'vuevertbars',
   targets: [
-    { dest: 'dist/vue-bars.js', format: 'umd' },
-    { dest: 'dist/vue-bars.common.js', format: 'cjs' },
-    { dest: 'dist/vue-bars.esm.js', format: 'es' }
+    { dest: 'dist/vuevertbars.js', format: 'umd' },
+    { dest: 'dist/vuevertbars.common.js', format: 'cjs' },
+    { dest: 'dist/vuevertbars.esm.js', format: 'es' }
   ]
 }
